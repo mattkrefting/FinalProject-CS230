@@ -138,6 +138,7 @@ airport_type = st.sidebar.selectbox('Airport type:', airport_types)
 
 #Creating a slider that is part of sidebar (Widget #3)
 x = st.sidebar.slider(f'Number of Countries for Most Airports Of Type {airport_type}',0,15,7)
+st.siderbar.header('Please select an altitude for the map:')
 altitude = st.sidebar.slider(f'Select Altitude for Map {airport_type}',0,29000,14500)
 st.subheader(f"Bar Graph of Each Type of Airport in {region}")
 st.pyplot(graph_region_airports_by_types(continent, country, region))
