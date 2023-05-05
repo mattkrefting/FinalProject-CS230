@@ -125,12 +125,15 @@ top_country = st.sidebar.radio("Top 10 Countries or Top 25 Countries with greate
 st.pyplot(graph_top_countries_airports(top_country))
 
 #Creating multiple selectboxes that is part of sidebar (Widget #2)
-st.sidebar.header("Please select continent, country and region:")
+st.sidebar.write("Please select continent, country and region:")
 continent = st.sidebar.selectbox('Continent: ', continents)
 #Filtering based on continent input and retrieving all unique countries in that continent
 country = st.sidebar.selectbox('Country: ', data[data['continent'] == continent]['iso_country'].unique())
 #Filtering based on country input and retrieving all unique regions in that country
 region = st.sidebar.selectbox('Region: ', data[data['iso_country'] == country]['iso_region'].unique())
+
+st.sidebar.write("Please Select Options for the piechart:")
+
 airport_type = st.sidebar.selectbox('Airport type:', airport_types)
 
 #Creating a slider that is part of sidebar (Widget #3)
