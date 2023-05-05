@@ -69,9 +69,6 @@ def obtain_data(data):
     # List comprehension to create a list of all unique airport types (Python feature #2)
     continents = [continent for continent in data['continent'].unique()]
     airport_types = [airport_type for airport_type in data['type'].unique()]
-    countries = data[data['continent'] == continent]['iso_country'].unique()
-    regions = data[data['iso_country'] == country]['iso_region'].unique()
-    
     # Returning multiple values (Python feature #3)
     return continents, airport_types
 
@@ -116,7 +113,7 @@ def create_map_of_altitude_airports(data, altitude):
 
 data = pd.read_csv("Data/airport-codes_csv.csv")
 data['is_high_altitude'] = data['elevation_ft'].apply(lambda x: True if x >= 9000 else False)
-continents, countries, regions, airport_types = obtain_data(data)
+continents, airport_types = obtain_data(data)
 st.title('Below are the following data points about airport statistics around the world')
 #Creating sidebar header (page design feature)
 st.sidebar.header('Inputs')
@@ -130,9 +127,9 @@ st.pyplot(graph_top_countries_airports(top_country))
 st.sidebar.write("Please select continent, country and region:")
 continent = st.sidebar.selectbox('Continent: ', continents)
 #Filtering based on continent input and retrieving all unique countries in that continent
-country = st.sidebar.selectbox('Country: ', countries)
+country = st.sidebar.selectbox('Country: ', data[data['continent'] == continent]['iso_country'].unique())
 #Filtering based on country input and retrieving all unique regions in that country
-region = st.sidebar.selectbox('Region: ', regions)
+region = st.sidebar.selectbox('Region: ', data[data['iso_country'] == country]['iso_region'].unique())
 
 st.sidebar.write("Please Select Options for the piechart:")
 
