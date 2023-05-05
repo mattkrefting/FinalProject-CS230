@@ -62,11 +62,6 @@ def graph_countries_with_greatest_airport_of_type(airport_type, top = 25):
     top_countries = counts.head(top)
     plt.title(f"Top {top} countries with most {airport_type}")
     plt.pie(top_countries.values, labels = top_countries.index, autopct='%.1f%%')
-    # for country in top_countries.index:
-    #     country_data = data[data['iso_country'] == country]
-    #     fig = px.choropleth(country_data, locations='iso_region', color='name', scope='usa')
-    #     fig.update_layout(title=f'Airport counts in {country}')
-    #     st.plotly_chart(fig)
     return plt
 
 
@@ -117,7 +112,7 @@ def create_map_of_altitude_airports(data, altitude):
     st.write("Map:")
     return map
 
-data = pd.read_csv("airport-codes_csv.csv")
+data = pd.read_csv("Data/airport-codes_csv.csv")
 data['is_high_altitude'] = data['elevation_ft'].apply(lambda x: True if x >= 9000 else False)
 continents, airport_types = obtain_data(data)
 st.title('Below are the following data points about airport statistics around the world')
