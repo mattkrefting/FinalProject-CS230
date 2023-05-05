@@ -60,7 +60,7 @@ def graph_countries_with_greatest_airport_of_type(airport_type, top = 25):
     counts = airport_count['iso_country'].value_counts()
     top_countries = counts.head(top)
     plt.title(f"Top {top} countries with most {airport_type}")
-    plt.pie(top_countries.values, labels = top_countries.index)
+    plt.pie(top_countries.values, labels = top_countries.index, autopct='%.1f%%')
     return plt
 
 
