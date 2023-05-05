@@ -69,10 +69,11 @@ def obtain_data(data):
     # List comprehension to create a list of all unique airport types (Python feature #2)
     continents = [continent for continent in data['continent'].unique()]
     airport_types = [airport_type for airport_type in data['type'].unique()]
-    countries = [country for country in data['iso_country'].unique()]
-    regions = [region for region in data['iso_region'].unique()]
+    countries = data[data['continent'] == continent]['iso_country'].unique()
+    regions = data[data['iso_country'] == country]['iso_region'].unique()
+    
     # Returning multiple values (Python feature #3)
-    return continents, countries, regions, airport_types
+    return continents, airport_types
 
 # Creates a map of airports with greatest elevation according to user input (Map)
 def create_map_of_altitude_airports(data, altitude):
